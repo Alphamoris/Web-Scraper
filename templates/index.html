@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Trends Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f8fa;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #1da1f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #1991da;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #results {
+            margin-top: 20px;
+        }
+        .trend-item {
+            margin: 10px 0;
+            padding: 15px;
+            border-left: 3px solid #1da1f2;
+            background-color: #f8f9fa;
+        }
+        .loading {
+            display: none;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .error {
+            color: #dc3545;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Twitter Trends Scraper</h1>
+        <button id="scrapeButton" onclick="scrapeTrends()">Click here to run the script</button>
+        <div id="loading" class="loading">Fetching trending topics...</div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function scrapeTrends() {
+            const resultsDiv = document.getElementById('results');
+            const loadingDiv = document.getElementById('loading');
+            const scrapeButton = document.getElementById('scrapeButton');
+            
+            try {
+                scrapeButton.disabled = true;
+                loadingDiv.style.display = 'block';
+                resultsDiv.innerHTML = '';
+
+                const response = await fetch('/scrape', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (!response.ok || data.error) {
+                    throw new Error(data.error || 'Failed to fetch trends');
+                }
+
+                const timestamp = new Date(data.timestamp.$date).toLocaleString();
+                let html = `<h2>Most happening topics as on ${timestamp}</h2>`;
+
+                // Add trends only if they exist
+                for (let i = 1; i <= 5; i++) {
+                    const trend = data[`trend${i}`];
+                    if (trend) {
+                        html += `<div class="trend-item">${trend}</div>`;
+                    }
+                }
+
+                html += `
+                    <p>The IP address used for this query was ${data.ip_address}</p>
+                    <h3>JSON extract from MongoDB:</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+                resultsDiv.innerHTML = html;
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="error">
+                        <strong>Error:</strong> ${error.message}
+                        <br>
+                        <small>Please try again later.</small>
+                    </div>
+                `;
+            } finally {
+                loadingDiv.style.display = 'none';
+                scrapeButton.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
