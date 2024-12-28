@@ -233,23 +233,8 @@ Special thanks to:
 - Selenium - Web automation
 - Flask - Web framework
 
-## 📊 Project Statistics
-
 <div align="center">
 
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/twitter-trends-scraper?style=for-the-badge)](https://github.com/yourusername/twitter-trends-scraper/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/yourusername/twitter-trends-scraper?style=for-the-badge)](https://github.com/yourusername/twitter-trends-scraper/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/yourusername/twitter-trends-scraper?style=for-the-badge)](https://github.com/yourusername/twitter-trends-scraper/issues)
-[![GitHub PRs](https://img.shields.io/github/issues-pr/yourusername/twitter-trends-scraper?style=for-the-badge)](https://github.com/yourusername/twitter-trends-scraper/pulls)
-
-</div>
-
----
-
-<div align="center">
-
-Created with ❤️ by [Your Organization]
-
-[Website](https://your-website.com) | [Documentation](https://docs.your-website.com) | [Support](mailto:support@your-website.com)
+Created with ❤️ by Alpha
 
 </div>
