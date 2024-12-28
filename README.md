@@ -85,7 +85,7 @@ graph LR
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/twitter-trends-scraper.git
+git clone https://github.com/alphamoris/Web-Scraper.git
 cd twitter-trends-scraper
 
 # Create virtual environment
@@ -213,16 +213,6 @@ We welcome contributions! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📚 Documentation
-
-- [API Reference](docs/API.md)
-- [Configuration Guide](docs/CONFIGURATION.md)
-- [Deployment Guide](docs/DEPLOYMENT.md)
-- [Security Best Practices](docs/SECURITY.md)
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙌 Acknowledgments
 
