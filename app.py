@@ -1,5 +1,4 @@
 
-
 from flask import Flask, render_template, jsonify
 from scraper import TwitterScraper
 import json
